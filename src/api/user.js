@@ -1,24 +1,27 @@
-import request from '@/utils/request'
+import request from "@/utils/request";
 
+//登录接口
 export function login(data) {
+  console.log(data);
   return request({
-    url: '/user/login',
-    method: 'post',
+    url: "http://132.232.89.22:8080/login",
+    method: "post",
     data
-  })
+  });
 }
 
+// 获取用户信息
 export function getInfo(token) {
   return request({
-    url: '/user/info',
-    method: 'get',
+    url: "http://132.232.89.22:8080/getadmin",
+    method: "get",
     params: { token }
-  })
+  });
 }
 
 export function logout() {
   return request({
-    url: '/user/logout',
-    method: 'post'
-  })
+    url: "/user/logout",
+    method: "post"
+  });
 }
