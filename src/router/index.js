@@ -31,18 +31,19 @@ import Layout from "@/layout";
  * all roles can be accessed
  */
 export const constantRoutes = [
+  //登录
   {
     path: "/login",
     component: () => import("@/views/login/index"),
     hidden: true ///当设置 true 的时候该路由不会再侧边栏出现 一般出现在登陆页面 404页面
   },
-
+  //404
   {
     path: "/404",
     component: () => import("@/views/404"),
     hidden: true //不在侧边栏线上
   },
-
+  //首页
   {
     path: "/",
     component: Layout,
@@ -56,101 +57,111 @@ export const constantRoutes = [
       }
     ]
   },
+  //学生查询
+  {
+    path: "/student",
+    component: () => import("@/views/student/index"),
+    hidden: true
+  }
+];
 
+//权限
+export const asyncRoutes = [
   {
     path: "/example",
     component: Layout,
     redirect: "/example/table",
+    alwaysShow: true, // 将始终显示根菜单
     name: "Example",
-    meta: { title: "管理员", icon: "example" },
+    meta: { title: "管理员", icon: "example", roles: ["1"] },
     children: [
       {
         path: "table",
         name: "Table",
         component: () => import("@/views/table/index"),
-        meta: { title: "管理员列表", icon: "table" }
+        meta: { title: "管理员列表", icon: "table", roles: ["1"] }
       },
       {
         path: "tree",
         name: "Tree",
         component: () => import("@/views/tree/index"),
-        meta: { title: "添加管理员", icon: "tree" }
+        meta: { title: "添加管理员", icon: "tree", roles: ["1"] }
       }
     ]
   },
   {
     path: "/form",
     component: Layout,
-    meta: { title: "学生操作", icon: "example" },
+    meta: { title: "学生操作", icon: "example", roles: ["1", "2", "3"] },
     children: [
       {
         path: "index",
         name: "Form",
         component: () => import("@/views/form/Handle/index.vue"),
-        meta: { title: "学生操作", icon: "form" }
+        meta: { title: "学生操作", icon: "form", roles: ["1", "2", "3"] }
       },
       {
         path: "add",
         name: "Add",
         component: () => import("@/views/form/add-student/index.vue"),
-        meta: { title: "学生添加", icon: "form" }
+        meta: { title: "学生添加", icon: "form", roles: ["1", "2"] }
       }
     ]
   },
   {
     path: "/classList",
     component: Layout,
-    meta: { title: "班级信息", icon: "example" },
+    meta: { title: "班级信息", icon: "example", roles: ["1", "2", "3"] },
     children: [
       {
         path: "index",
         name: "Form",
         component: () => import("@/views/form/Handle/index.vue"),
-        meta: { title: "班级列表", icon: "form" }
+        meta: { title: "班级列表", icon: "form", roles: ["1", "2", "3"] }
       },
       {
         path: "add",
         name: "Add",
         component: () => import("@/views/form/add-student/index.vue"),
-        meta: { title: "添加班级", icon: "form" }
+        meta: { title: "添加班级", icon: "form", roles: ["1", "2"] }
       }
     ]
   },
   {
     path: "/classTeacher",
     component: Layout,
-    meta: { title: "班主任", icon: "example" },
+    meta: { title: "班主任", icon: "example", roles: ["1", "2", "3"] },
     children: [
       {
         path: "classTeacherList",
         name: "ClassTeacherList",
         component: () => import("@/views/form/Handle/index.vue"),
-        meta: { title: "班主任列表", icon: "form" }
+        meta: { title: "班主任列表", icon: "form", roles: ["1", "2", "3"] }
       },
       {
         path: "addClassTeacherList",
         name: "AddClassTeacherList",
         component: () => import("@/views/form/add-student/index.vue"),
-        meta: { title: "添加班主任", icon: "form" }
+        meta: { title: "添加班主任", icon: "form", roles: ["1", "2"] }
       }
     ]
   },
   {
     path: "/teacher",
     component: Layout,
-    meta: { title: "讲师", icon: "example" },
+    meta: { title: "讲师", icon: "example", roles: ["1", "2", "3"] },
     children: [
       {
         path: "teacherList",
         name: "TeacherList",
         component: () => import("@/views/teacher/teacherlist/index.vue"),
-        meta: { title: "讲师列表", icon: "form" }
+        meta: { title: "讲师列表", icon: "form", roles: ["1", "2", "3"] }
       },
       {
         path: "addTeacherList",
         name: "AddTeacherList",
         component: () => import("@/views/teacher/addteacher/index.vue"),
-        meta: { title: "添加讲师", icon: "form" }
+        meta: { title: "添加讲师", icon: "form", roles: ["1", "2"] }
       }
     ]
   },
@@ -161,91 +172,20 @@ export const constantRoutes = [
         path: "agora",
         name: "市场部",
         component: () => import("@/views/dashboard/index"),
-        meta: { title: "市场部", icon: "dashboard" }
+        meta: { title: "市场部", icon: "dashboard", roles: ["1", "2", "3"] }
       }
     ]
   },
-
-  // {
-  //   path: "/form",
-  //   component: Layout,
-  //   children: [
-  //     {
-  //       path: "index",
-  //       name: "Form",
-  //       // component: () => import("@/views/form/Handle/index.vue"),  //不需要  因为只有点击俩子组件才会有页面
-  //       meta: { title: "学生操作", icon: "form" }
-  //     }
-  //   ]
-  // },
-
   {
-    path: "/nested",
+    path: "/major",
     component: Layout,
-    redirect: "/nested/menu1",
-    name: "Nested",
-    meta: {
-      title: "Nested",
-      icon: "nested"
-    },
+    redirect: "/major/menu1",
     children: [
       {
         path: "menu1",
-        component: () => import("@/views/nested/menu1/index"), // Parent router-view
-        name: "Menu1",
-        meta: { title: "Menu1" },
-        children: [
-          {
-            path: "menu1-1",
-            component: () => import("@/views/nested/menu1/menu1-1"),
-            name: "Menu1-1",
-            meta: { title: "Menu1-1" }
-          },
-          {
-            path: "menu1-2",
-            component: () => import("@/views/nested/menu1/menu1-2"),
-            name: "Menu1-2",
-            meta: { title: "Menu1-2" },
-            children: [
-              {
-                path: "menu1-2-1",
-                component: () =>
-                  import("@/views/nested/menu1/menu1-2/menu1-2-1"),
-                name: "Menu1-2-1",
-                meta: { title: "Menu1-2-1" }
-              },
-              {
-                path: "menu1-2-2",
-                component: () =>
-                  import("@/views/nested/menu1/menu1-2/menu1-2-2"),
-                name: "Menu1-2-2",
-                meta: { title: "Menu1-2-2" }
-              }
-            ]
-          },
-          {
-            path: "menu1-3",
-            component: () => import("@/views/nested/menu1/menu1-3"),
-            name: "Menu1-3",
-            meta: { title: "Menu1-3" }
-          }
-        ]
-      },
-      {
-        path: "menu2",
-        component: () => import("@/views/nested/menu2/index"),
-        meta: { title: "menu2" }
-      }
-    ]
-  },
-
-  {
-    path: "external-link",
-    component: Layout,
-    children: [
-      {
-        path: "https://panjiachen.github.io/vue-element-admin-site/#/",
-        meta: { title: "External Link", icon: "link" }
+        component: () => import("@/views/major/menu1/index.vue"),
+        name: "专业",
+        meta: { title: "专业", icon: "dashboard", roles: ["1", "2", "3"] }
       }
     ]
   },
