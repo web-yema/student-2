@@ -103,7 +103,7 @@ export const asyncRoutes = [
       {
         path: "add",
         name: "Add",
-        component: () => import("@/views/form/add-student/index.vue"),
+        component: () => import("@/views/form/Handle/addStudents.vue"),
         meta: { title: "学生添加", icon: "form", roles: ["1", "2"] }
       }
     ]
@@ -116,13 +116,13 @@ export const asyncRoutes = [
       {
         path: "index",
         name: "Form",
-        component: () => import("@/views/form/Handle/index.vue"),
+        component: () => import("@/views/form/class/classlist.vue"),
         meta: { title: "班级列表", icon: "form", roles: ["1", "2", "3"] }
       },
       {
         path: "add",
         name: "Add",
-        component: () => import("@/views/form/add-student/index.vue"),
+        component: () => import("@/views/form/class/addclass.vue"),
         meta: { title: "添加班级", icon: "form", roles: ["1", "2"] }
       }
     ]
@@ -135,13 +135,15 @@ export const asyncRoutes = [
       {
         path: "classTeacherList",
         name: "ClassTeacherList",
-        component: () => import("@/views/form/Handle/index.vue"),
+        component: () =>
+          import("@/views/form/classTeacher/ClassTeacherList.vue"),
         meta: { title: "班主任列表", icon: "form", roles: ["1", "2", "3"] }
       },
       {
         path: "addClassTeacherList",
         name: "AddClassTeacherList",
-        component: () => import("@/views/form/add-student/index.vue"),
+        component: () =>
+          import("@/views/form/classTeacher/AddClassTeacher.vue"),
         meta: { title: "添加班主任", icon: "form", roles: ["1", "2"] }
       }
     ]
