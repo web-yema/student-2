@@ -37,8 +37,6 @@ router.beforeEach(async (to, from, next) => {
           // 获取用户信息
           // 注意：角色必须是对象数组！例如：['admin']或，['developer'，'editor']
           const { roles, loginFlag } = await store.dispatch("user/getInfo");
-          console.log(roles);
-          console.log(loginFlag);
 
           // 判断 loginFlag为true还是false
           // 如果是true就走 next(`/changepassword`) 修改页面

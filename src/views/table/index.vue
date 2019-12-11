@@ -2,41 +2,30 @@
   <div class="app-container">
     <el-table
       v-loading="listLoading"
-      :data="list"
+      :data="tableData"
       element-loading-text="Loading"
       border
       fit
       highlight-current-row
     >
-      <el-table-column align="center" label="ID" width="95">
+      <el-table-column label="名称" align="center">
         <template slot-scope="scope">
-          {{ scope.$index }}
+          <div v-show="isUpdate!==scope.row._id">{{ scope.row.adminName }}</div>
         </template>
       </el-table-column>
-      <el-table-column label="Title">
+      <el-table-column label="密码" align="center">
         <template slot-scope="scope">
-          {{ scope.row.title }}
+          <div v-show="isUpdate !== scope.row._id">{{ scope.row.password }}</div>
         </template>
       </el-table-column>
-      <el-table-column label="Author" width="110" align="center">
+      <el-table-column label="权限" align="center">
         <template slot-scope="scope">
-          <span>{{ scope.row.author }}</span>
+          <div v-show="isUpdate !== scope.row._id">{{ scope.row.power }}</div>
         </template>
       </el-table-column>
-      <el-table-column label="Pageviews" width="110" align="center">
+      <el-table-column label="操作" align="center">
         <template slot-scope="scope">
-          {{ scope.row.pageviews }}
-        </template>
-      </el-table-column>
-      <el-table-column class-name="status-col" label="Status" width="110" align="center">
-        <template slot-scope="scope">
-          <el-tag :type="scope.row.status | statusFilter">{{ scope.row.status }}</el-tag>
-        </template>
-      </el-table-column>
-      <el-table-column align="center" prop="created_at" label="Display_time" width="200">
-        <template slot-scope="scope">
-          <i class="el-icon-time" />
-          <span>{{ scope.row.display_time }}</span>
+          <el-button size="mini" type="danger" v-show="isUpdate !== scope.row._id" @click="handleDelete(scope.row._id)">删除</el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -44,34 +33,66 @@
 </template>
 
 <script>
-import { getList } from '@/api/table'
+import { getAllAdmin,delAdmin } from '@/api/user'
 
 export default {
-  filters: {
-    statusFilter(status) {
-      const statusMap = {
-        published: 'success',
-        draft: 'gray',
-        deleted: 'danger'
-      }
-      return statusMap[status]
-    }
-  },
   data() {
     return {
-      list: null,
-      listLoading: true
+      listLoading: true, // 加载状态
+      isUpdate: '',
+      tableData: [], // 所有用户
+      update: {
+        power: ''
+      },
+      value: '', // 权限
+      adminName:'', // 名称
+      password:'' // 密码 
     }
   },
-  created() {
-    this.fetchData()
+  mounted(){
+    this.handlegetHeadTeacher()
   },
-  methods: {
-    fetchData() {
-      this.listLoading = true
-      getList().then(response => {
-        this.list = response.data.items
+  methods:{
+    async handlegetHeadTeacher(){
+      let {data} = await getAllAdmin()
+      console.log(data.data);
+      this.tableData = data.data;
+      if(data.code === 200) {
         this.listLoading = false
+      }
+      for(var i=0;i<this.tableData.length;i++) {
+        let tableDatas = this.tableData[i].power
+        if(tableDatas === '2'){
+          tableDatas = '管理员'
+        }else if(tableDatas === '3'){
+          tableDatas = '普通用户'
+        }
+        this.tableData[i].power = tableDatas
+      }
+    },
+    //删除一项
+    handleDelete(id) {
+      this.$confirm('此操作将永久删除该项, 是否继续?', '提示', {
+      confirmButtonText: '确定',
+      cancelButtonText: '取消',
+      type: 'warning'
+    })
+      .then(async res => {
+        const { data } = await delAdmin(id)
+        if (data.code === 200) {
+          this.handlegetHeadTeacher()
+          return this.$message.success(data.msg)
+        }
+        this.$message({
+          message: data.msg,
+          type: 'error'
+        })
+      })
+      .catch(error => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        })
       })
     }
   }

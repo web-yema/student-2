@@ -1,8 +1,7 @@
 import request from "@/utils/request";
-
+import axios from "axios";
 //登录接口
 export function login(data) {
-  console.log(data);
   return request({
     url: "http://132.232.89.22:8080/login",
     method: "post",
@@ -24,4 +23,17 @@ export function logout() {
     url: "/user/logout",
     method: "post"
   });
+}
+// 获取所有管理员信息
+export function getAllAdmin() {
+  return axios.get("http://132.232.89.22:8080/getAllAdmin");
+}
+
+// 删除管理员
+export function delAdmin(data) {
+  return axios.post("http://132.232.89.22:8080/delAdmin", { _id: data });
+}
+//创建用户
+export function register(data) {
+  return axios.post("http://132.232.89.22:8080/register", data);
 }

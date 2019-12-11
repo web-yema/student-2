@@ -169,11 +169,13 @@ export const asyncRoutes = [
   },
   {
     path: "/agora",
+    component: Layout,
+    redirect: "/agora/menu1",
     children: [
       {
-        path: "agora",
+        path: "menu1",
         name: "市场部",
-        component: () => import("@/views/dashboard/index"),
+        component: () => import("@/views/agora/menu1/index.vue"),
         meta: { title: "市场部", icon: "dashboard", roles: ["1", "2", "3"] }
       }
     ]
