@@ -37,3 +37,7 @@ export function delAdmin(data) {
 export function register(data) {
   return axios.post("http://132.232.89.22:8080/register", data);
 }
+// 修改密码
+export function updateAdminPass(obj) {
+  return axios.post('http://132.232.89.22:8080/updateAdminPass', obj)
+}

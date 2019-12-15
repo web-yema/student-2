@@ -1,6 +1,5 @@
 <template>
   <div class="dashboard-container">
-    <div class="dashboard-container">
     <el-row :gutter="40" class="panel-group">
       <!-- 学生人数 -->
       <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
@@ -10,12 +9,12 @@
           </div>
           <div class="card-panel-description">
             <div class="card-panel-text">学生人数</div>
-            <!-- <count-to
+            <count-to
               :start-val="0"
               :end-val="getPage"
               :duration="2600"
               class="card-panel-num"
-            /> -->
+            />
           </div>
         </div>
       </el-col>
@@ -27,12 +26,12 @@
           </div>
           <div class="card-panel-description">
             <div class="card-panel-text">班级</div>
-            <!-- <count-to
+            <count-to
               :start-val="0"
               :end-val="getClass"
               :duration="3000"
               class="card-panel-num"
-            /> -->
+            />
           </div>
         </div>
       </el-col>
@@ -44,12 +43,12 @@
           </div>
           <div class="card-panel-description">
             <div class="card-panel-text">班主任</div>
-            <!-- <count-to
+            <count-to
               :start-val="0"
               :end-val="getHeadAll"
               :duration="3200"
               class="card-panel-num"
-            /> -->
+            />
           </div>
         </div>
       </el-col>
@@ -61,12 +60,12 @@
           </div>
           <div class="card-panel-description">
             <div class="card-panel-text">讲师</div>
-            <!-- <count-to
+            <count-to
               :start-val="0"
               :end-val="getTeacherAll"
               :duration="3600"
               class="card-panel-num"
-            /> -->
+            />
           </div>
         </div>
       </el-col>
@@ -75,10 +74,12 @@
       <EcharsZhu :chart-data="lineChartData" />
     </el-row>
   </div>
-  </div>
 </template>
 
 <script>
+import CountTo from 'vue-count-to';
+import { getPage, getClass } from '@/api/api';
+import {getHeadAll,getTeacherAll} from '@/api/headAll.js'
 import { mapGetters } from 'vuex'
 import EcharsZhu from './echars/echarszhu.vue';
 const lineChartData = {
@@ -89,7 +90,7 @@ const lineChartData = {
 };
 export default {
   name: 'Dashboard',
-  components:{EcharsZhu},
+  components:{CountTo,EcharsZhu},
   computed: {
     ...mapGetters([
       'name'
@@ -97,13 +98,27 @@ export default {
   },
   data() {
     return {
-      // getPage: 0, // 学生
-      // getClass: 0, // 班级
-      // getHeadAll:0, // 班主任
-      // getTeacherAll:0, // 讲师
+      getPage: 0, // 学生
+      getClass: 0, // 班级
+      getHeadAll:0, // 班主任
+      getTeacherAll:0, // 讲师
       lineChartData: lineChartData.newVisitis
     };
   },
+  async mounted() {
+    // 获取学生总人数
+    const { data } = await getPage();
+    this.getPage = data.total;
+    // 获取班级数量
+    const Class = await getClass();
+    this.getClass = Class.data.data.length;
+    // 获取班主任总数量
+    const HeadAll = await getHeadAll();
+    this.getHeadAll = HeadAll.data.total;
+    // 获取讲师总数量
+    const TeacherAll = await getTeacherAll();
+    this.getTeacherAll = TeacherAll.data.total;
+  }
 }
 </script>
 
