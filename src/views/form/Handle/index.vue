@@ -1,143 +1,171 @@
 <template>
-  <el-table :data="tableData" style="width: 150%">
-    <el-table-column label="学号">
-      <template slot-scope="scope">
-        <el-input
-          v-if="scope.$index === updateShow"
-          v-model="studentID"
-          size="mini"
-          placeholder="请输入内容"
-        />
-        <div v-else>{{ tableData[scope.$index].studentID }}</div>
-      </template>
-    </el-table-column>
-    <el-table-column label="姓名">
-      <template slot-scope="scope">
-        <el-input
-          v-if="scope.$index === updateShow"
-          v-model="upname"
-          size="mini"
-          placeholder="请输入内容"
-        />
-        <div v-else>{{ tableData[scope.$index].name }}</div>
-      </template>
-    </el-table-column>
-    <el-table-column label="籍贯">
-      <template slot-scope="scope">
-        <el-input
-          v-if="scope.$index === updateShow"
-          v-model="nativeplace"
-          size="mini"
-          placeholder="请输入内容"
-        />
-        <div v-else>{{ tableData[scope.$index].nativeplace }}</div>
-      </template>
-    </el-table-column>
-    <el-table-column label="性别">
-      <template slot-scope="scope">
-        <div v-if="scope.$index === updateShow" style="display:flex;">
-          <el-radio v-model="upsex" label="男">男</el-radio>
-          <el-radio v-model="upsex" style="margin-left:-15px;" label="女">女</el-radio>
-        </div>
-        <div v-else>{{ tableData[scope.$index].sex }}</div>
-      </template>
-    </el-table-column>
-    <el-table-column label="年龄">
-      <template slot-scope="scope">
-        <div v-if="scope.$index === updateShow">
+  <div>
+    <el-table :data="tableData" style="width: 150%">
+      <el-table-column label="学号">
+        <template slot-scope="scope">
           <el-input
             v-if="scope.$index === updateShow"
-            v-model="upage"
+            v-model="studentID"
             size="mini"
             placeholder="请输入内容"
           />
-        </div>
-        <div v-else>{{ tableData[scope.$index].age }}</div>
-      </template>
-    </el-table-column>
-    <el-table-column label="学制">
-      <template slot-scope="scope">
-        <div>{{ tableData[scope.$index].study }}</div>
-      </template>
-    </el-table-column>
-    <el-table-column label="专业">
-      <template slot-scope="scope">
-        <div>{{ tableData[scope.$index].major }}</div>
-      </template>
-    </el-table-column>
-    <el-table-column label="班级">
-      <template slot-scope="scope">
-        <div v-if="scope.$index === updateShow">
-          <el-select v-model="upclass" size="mini" placeholder="班级">
-            <el-option v-for="item in upclasses" :key="item" size="mini" :value="item" />
-          </el-select>
-        </div>
-        <div v-else>{{ tableData[scope.$index].classes }}</div>
-      </template>
-    </el-table-column>
-    <el-table-column label="市场部">
-      <template slot-scope="scope">
-        <div v-if="scope.$index === updateShow">
-          <el-select v-model="upcityCenter" size="mini" placeholder="市场部">
-            <el-option v-for="item in upcityCenters" :key="item" size="mini" :value="item" />
-          </el-select>
-        </div>
-        <div v-else>{{ tableData[scope.$index].citycenter }}</div>
-      </template>
-    </el-table-column>
-    <el-table-column label="当前成绩">
-      <template slot-scope="scope">
-        <el-input
-          v-if="scope.$index === updateShow"
-          v-model="upchengji"
-          size="mini"
-          placeholder="请输入内容"
-        />
-        <div v-else style="text-align:center">{{ tableData[scope.$index].chengji }}</div>
-      </template>
-    </el-table-column>
-    <el-table-column label="还差成绩">
-      <template slot-scope="scope">
-        <el-input
-          v-if="scope.$index === updateShow"
-          v-model="upgraduation"
-          size="mini"
-          placeholder="请输入内容"
-        />
-        <div v-else style="text-align:center">{{ tableData[scope.$index].graduation }}</div>
-      </template>
-    </el-table-column>
-    <el-table-column label="挂科次数">
-      <template slot-scope="scope">
-        <el-input
-          v-if="scope.$index === updateShow"
-          v-model="upFail"
-          size="mini"
-          placeholder="请输入内容"
-        />
-        <div v-else style="text-align:center">{{ tableData[scope.$index].failss }}</div>
-      </template>
-    </el-table-column>
-    <el-table-column label="入学时间">
-      <template slot-scope="scope">
-        <el-input
-          v-if="scope.$index === updateShow"
-          v-model="intime"
-          size="mini"
-          placeholder="请输入内容"
-        />
-        <div v-else style="text-align:center">{{ tableData[scope.$index].entryDate }}</div>
-      </template>
-    </el-table-column>
-    <el-table-column align="right">
-      <template slot-scope="scope">
-        <el-button v-if="scope.$index === updateShow" size="mini" type="primary">确定</el-button>
-      </template>
-    </el-table-column>
-  </el-table>
+          <div v-else>{{ tableData[scope.$index].studentID }}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="姓名">
+        <template slot-scope="scope">
+          <el-input
+            v-if="scope.$index === updateShow"
+            v-model="upname"
+            size="mini"
+            placeholder="请输入内容"
+          />
+          <div v-else>{{ tableData[scope.$index].name }}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="籍贯">
+        <template slot-scope="scope">
+          <el-input
+            v-if="scope.$index === updateShow"
+            v-model="nativeplace"
+            size="mini"
+            placeholder="请输入内容"
+          />
+          <div v-else>{{ tableData[scope.$index].nativeplace }}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="性别">
+        <template slot-scope="scope">
+          <div v-if="scope.$index === updateShow" style="display:flex;">
+            <el-radio v-model="upsex" label="男">男</el-radio>
+            <el-radio v-model="upsex" style="margin-left:-15px;" label="女">女</el-radio>
+          </div>
+          <div v-else>{{ tableData[scope.$index].sex }}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="年龄">
+        <template slot-scope="scope">
+          <div v-if="scope.$index === updateShow">
+            <el-input
+              v-if="scope.$index === updateShow"
+              v-model="upage"
+              size="mini"
+              placeholder="请输入内容"
+            />
+          </div>
+          <div v-else>{{ tableData[scope.$index].age }}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="学制">
+        <template slot-scope="scope">
+          <div>{{ tableData[scope.$index].study }}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="专业">
+        <template slot-scope="scope">
+          <div>{{ tableData[scope.$index].major }}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="班级">
+        <template slot-scope="scope">
+          <div v-if="scope.$index === updateShow">
+            <el-select v-model="upclass" size="mini" placeholder="班级">
+              <el-option v-for="item in upclasses" :key="item" size="mini" :value="item" />
+            </el-select>
+          </div>
+          <div v-else>{{ tableData[scope.$index].classes }}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="市场部">
+        <template slot-scope="scope">
+          <div v-if="scope.$index === updateShow">
+            <el-select v-model="upcityCenter" size="mini" placeholder="市场部">
+              <el-option v-for="item in upcityCenters" :key="item" size="mini" :value="item" />
+            </el-select>
+          </div>
+          <div v-else>{{ tableData[scope.$index].citycenter }}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="当前成绩">
+        <template slot-scope="scope">
+          <el-input
+            v-if="scope.$index === updateShow"
+            v-model="upchengji"
+            size="mini"
+            placeholder="请输入内容"
+          />
+          <div v-else style="text-align:center">{{ tableData[scope.$index].chengji }}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="还差成绩">
+        <template slot-scope="scope">
+          <el-input
+            v-if="scope.$index === updateShow"
+            v-model="upgraduation"
+            size="mini"
+            placeholder="请输入内容"
+          />
+          <div v-else style="text-align:center">{{ tableData[scope.$index].graduation }}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="挂科次数">
+        <template slot-scope="scope">
+          <el-input
+            v-if="scope.$index === updateShow"
+            v-model="upFail"
+            size="mini"
+            placeholder="请输入内容"
+          />
+          <div v-else style="text-align:center">{{ tableData[scope.$index].failss }}</div>
+        </template>
+      </el-table-column>
+      <el-table-column label="入学时间">
+        <template slot-scope="scope">
+          <el-input
+            v-if="scope.$index === updateShow"
+            v-model="intime"
+            size="mini"
+            placeholder="请输入内容"
+          />
+          <div v-else style="text-align:center">{{ tableData[scope.$index].entryDate }}</div>
+        </template>
+      </el-table-column>
+      <el-table-column align="right">
+        <template slot-scope="scope">
+          <el-button v-if="scope.$index === updateShow" size="mini" type="primary">确定</el-button>
+        </template>
+      </el-table-column>
+    </el-table>
+    <!-- 分页 -->
+    <!-- size-change	pageSize 改变时会触发 -->
+    <!-- current-change	currentPage 改变时会触发 -->
+    <!-- 此例是一个完整的用例，使用了size-change和current-change事件来处理页码大小和当前页变动时候触发的事件。
+    page-sizes接受一个整型数组，数组元素为展示的选择每页显示个数的选项，[100, 200, 300, 400]表示四个选项，每页显示 100 个，200 个，
+    300 个或者 400 个。-->
+    <el-pagination
+      @size-change="handleSizeChange"
+      :current-page="currentPage"
+      @current-change="handleCurrentChange"
+      :page-sizes="[ 10, 20]"
+      :page-size="pageSize"
+      layout="total, sizes, prev, pager, next, jumper"
+      :total="total"
+      style="position:fixed;left:250px;bottom:20px;"
+    />
+    <!-- 导出excel表 -->
+    <el-button
+      v-if="power"
+      size="mini"
+      :loading="exportLodding"
+      type="success"
+      style="position:fixed;right:5px;bottom:20px;"
+      @click="outExcel"
+    >导出当页excel</el-button>
+  </div>
 </template>
 
 <script>
+import "./add.css";
 import {
   selectAllstud, // 查询学生信息
   getPage, // 分页和学生
@@ -157,7 +185,7 @@ export default {
       //  ·················································· 分页数据
       selectflag: false, // 标识, 用来给查询使用
       total: 1, // 数据总条数，默认给1
-      pageSize: 7, // 每页展示条数 用来让total进行切割，算出来一共的页数
+      pageSize: 10, // 每页展示条数 用来让total进行切割，算出来一共的页数
       currentPage: 1, // 当前在第几页,默认在第一页
       updateShow: 100000, // 当前展示的修改弹出项，给这么大是为了一开始谁也匹配不到
       intime: "", // 入学时间
@@ -242,6 +270,14 @@ export default {
     this.CityCenters();
   },
   methods: {
+    handleSizeChange: function(size) {
+      this.pageSize = size; // 每页下拉显示数据
+      this.getPage(this.currentPage, this.pageSize);
+    },
+    handleCurrentChange: function(currentPage) {
+      this.currentPage = currentPage; // 点击第几页
+      this.getPage(this.currentPage, this.pageSize);
+    },
     // 切割籍贯函数
     sliceJg(Array) {
       // for循环出来这个数组的长度
