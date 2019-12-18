@@ -119,7 +119,6 @@ export default {
     // 获取讲师总数量
     const TeacherAll = await getLecturer();
     this.getLecturer = TeacherAll.data.data.length;
-    console.log(TeacherAll.data.data.length)
   }
 }
 </script>
