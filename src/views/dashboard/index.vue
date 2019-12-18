@@ -62,7 +62,7 @@
             <div class="card-panel-text">讲师</div>
             <count-to
               :start-val="0"
-              :end-val="getTeacherAll"
+              :end-val="getLecturer"
               :duration="3600"
               class="card-panel-num"
             />
@@ -79,7 +79,7 @@
 <script>
 import CountTo from 'vue-count-to';
 import { getPage, getClass } from '@/api/api';
-import {getHeadAll,getTeacherAll} from '@/api/headAll.js'
+import {getHeadAll,getLecturer} from '@/api/headAll.js'
 import { mapGetters } from 'vuex'
 import EcharsZhu from './echars/echarszhu.vue';
 const lineChartData = {
@@ -101,7 +101,7 @@ export default {
       getPage: 0, // 学生
       getClass: 0, // 班级
       getHeadAll:0, // 班主任
-      getTeacherAll:0, // 讲师
+      getLecturer:0, // 讲师
       lineChartData: lineChartData.newVisitis
     };
   },
@@ -115,9 +115,11 @@ export default {
     // 获取班主任总数量
     const HeadAll = await getHeadAll();
     this.getHeadAll = HeadAll.data.total;
+    console.log(HeadAll.data)
     // 获取讲师总数量
-    const TeacherAll = await getTeacherAll();
-    this.getTeacherAll = TeacherAll.data.total;
+    const TeacherAll = await getLecturer();
+    this.getLecturer = TeacherAll.data.data.length;
+    console.log(TeacherAll.data.data.length)
   }
 }
 </script>

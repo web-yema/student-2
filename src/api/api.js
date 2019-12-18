@@ -25,7 +25,7 @@ export const delAllStudent = _id => {
 export const getMajor = () => {
   return Axios.get("http://132.232.89.22:8080/getMajor");
 };
-// 获取市场部
+//获取市场部
 export const getMarketing = () => {
   return Axios.get("http://132.232.89.22:8080/getMarket");
 };
