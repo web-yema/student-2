@@ -153,14 +153,14 @@
       style="position:fixed;left:250px;bottom:20px;"
     />
     <!-- 导出excel表 -->
-    <el-button
+    <!-- <el-button
       v-if="power"
       size="mini"
       :loading="exportLodding"
       type="success"
       style="position:fixed;right:5px;bottom:20px;"
       @click="outExcel"
-    >导出当页excel</el-button>
+    >导出当页excel</el-button> -->
   </div>
 </template>
 

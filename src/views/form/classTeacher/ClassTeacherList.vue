@@ -103,7 +103,7 @@ export default {
   methods: {
     addHeads() {
       this.$router.push({
-        name: "addHeads"
+        name: "AddClassTeacherList"
       });
     },
     //每页下拉显示数据下拉事件调用
