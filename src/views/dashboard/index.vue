@@ -3,7 +3,7 @@
     <el-row :gutter="40" class="panel-group">
       <!-- 学生人数 -->
       <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
-        <div class="card-panel" @click="handleSetLineChartData('newVisitis')">
+        <div class="card-panel">
           <div class="card-panel-icon-wrapper icon-people">
             <svg-icon icon-class="peoples" class-name="card-panel-icon" />
           </div>
@@ -20,7 +20,7 @@
       </el-col>
       <!-- 班级 -->
       <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
-        <div class="card-panel" @click="handleSetLineChartData('messages')">
+        <div class="card-panel">
           <div class="card-panel-icon-wrapper icon-message">
             <svg-icon icon-class="classgl" class-name="card-panel-icon" />
           </div>
@@ -37,7 +37,7 @@
       </el-col>
       <!-- 班主任 -->
       <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
-        <div class="card-panel" @click="handleSetLineChartData('purchases')">
+        <div class="card-panel">
           <div class="card-panel-icon-wrapper icon-money">
             <svg-icon icon-class="headmasterList" class-name="card-panel-icon" />
           </div>
@@ -54,7 +54,7 @@
       </el-col>
       <!-- 讲师 -->
       <el-col :xs="12" :sm="12" :lg="6" class="card-panel-col">
-        <div class="card-panel" @click="handleSetLineChartData('shoppings')">
+        <div class="card-panel">
           <div class="card-panel-icon-wrapper icon-shopping">
             <svg-icon icon-class="lecturer" class-name="card-panel-icon" />
           </div>

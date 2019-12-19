@@ -43,6 +43,19 @@ export const constantRoutes = [
     component: () => import("@/views/404"),
     hidden: true //不在侧边栏线上
   },
+  {
+    path: "/yourprofile ",
+    component: Layout,
+    children: [
+      {
+        path: "/yourprofile",
+        name: "Yourprofile",
+        component: () => import("@/views/yourprofile/index"),
+        meta: { title: "个人中心" },
+        hidden: true
+      }
+    ]
+  },
   //首页
   {
     path: "/",
@@ -200,7 +213,7 @@ export const asyncRoutes = [
 
 const createRouter = () =>
   new Router({
-    // mode: 'history', // require service support
+    mode: "history", // require service support
     scrollBehavior: () => ({ y: 0 }),
     routes: constantRoutes
   });
